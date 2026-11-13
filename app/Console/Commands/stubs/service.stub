@@ -1,0 +1,15 @@
+<?php
+
+namespace {{ namespace }};
+
+class {{ class }}
+{
+    /**
+     * La lógica de negocio vive aquí: los controladores se mantienen delgados
+     * (ver docs/02-arquitectura.md).
+     */
+    public function __invoke(): void
+    {
+        //
+    }
+}

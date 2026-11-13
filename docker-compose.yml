@@ -1,0 +1,52 @@
+# Entorno LOCAL — docs/05-despliegue.md
+# Producción usa docker-compose.prod.yml (se crea en Fase 5).
+name: bafoldanz
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: dev
+      args:
+        UID: "1000"
+        GID: "1000"
+        XDEBUG: "${XDEBUG:-false}"
+    user: "1000:1000"
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    environment:
+      APP_ENV: "${APP_ENV:-local}"
+    volumes:
+      - .:/var/www
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - bafoldanz
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "${DB_HOST_PORT:-33061}:3306"
+    environment:
+      MYSQL_DATABASE: "${DB_DATABASE:-bafoldanz}"
+      MYSQL_USER: "${DB_USERNAME:-bafoldanz}"
+      MYSQL_PASSWORD: "${DB_PASSWORD:-secret}"
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD:-root-secret}"
+    volumes:
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-p${DB_ROOT_PASSWORD:-root-secret}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 15s
+    networks:
+      - bafoldanz
+
+networks:
+  bafoldanz:
+
+volumes:
+  dbdata:
