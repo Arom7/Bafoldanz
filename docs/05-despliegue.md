@@ -128,7 +128,7 @@ Los datos incluyen pagos: sin backup no hay MVP.
 - `DemoStudentsSeeder` **no corre en producción** (son datos de ejemplo).
 - Comando dedicado (ej. `php artisan app:create-director` o seeder parametrizado) que crea las **2 directoras** con credenciales tomadas de variables de `.env` (`DIRECTORA_1_EMAIL`, `DIRECTORA_1_PASSWORD`, ...).
 - `make admin` como atajo en producción.
-- Catálogos reales (sucursales, grupos, cuentas) se cargan con `CatalogSeeder`; los alumnos se cargan desde la UI.
+- Catálogos reales (sucursales, tipos de grupo y grupos con su horario) se cargan con `CatalogSeeder`; las inscripciones y los alumnos se cargan desde la UI.
 
 ## Makefile (atajos oficiales del proyecto)
 

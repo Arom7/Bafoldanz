@@ -32,7 +32,7 @@ Barra arcoíris bajo el header: altura 5px, radio 10px, degradado 90°:
 | `#666` / `#777` / `#888` | textos secundarios (`muted`), firma, estados vacíos |
 | `#792cce` (morado) | stat "Bailarines activos" |
 | `#158c54` (verde) | stat "Mensualidades pagadas" |
-| `#d97d08` (naranja) | stat "Por regularizar" / "Retiros" |
+| `#d97d08` (naranja) | stat "Por regularizar" / "Salidas" |
 | `#dc396f` (rosa) | stat "Ingresos registrados" |
 
 ### Fondos
@@ -97,14 +97,14 @@ Barra arcoíris bajo el header: altura 5px, radio 10px, degradado 90°:
 ## Textos de UI (copys) a respetar
 
 - Aviso de secciones: la demo usaba un aviso de "versión de prueba"; en producción **no aplica** (no copiar).
-- Formularios: "Agregar bailarín", "Guardar bailarín", "Registrar mensualidad completa", "Guardar movimiento", "Guardar asistencia".
-- Etiquetas de formularios: `Sucursal`, `Grupo`, `Mensualidad (Bs.)`, `Día fijo de pago`, `Tarifa promocional permanente`, `Fecha`, `Bailarín`, `Marca`, `Mes que se paga`, `Medio de pago`, `Tipo`, `Concepto`, `Monto (Bs.)`, `Origen`, `Destino`, `Directora`, `Reserva para caja chica (Bs.)`.
+- Formularios: "Agregar bailarín", "Guardar bailarín", "Registrar mensualidad completa", "Guardar salida", "Guardar asistencia".
+- Etiquetas de formularios: `Sucursal`, `Grupo`, `Mensualidad (Bs.)`, `Día fijo de pago`, `Tarifa promocional permanente`, `Fecha`, `Bailarín`, `Marca`, `Mes que se paga`, `Medio de pago`, `Concepto`, `Monto (Bs.)`, `Directora`, `Reserva para caja chica (Bs.)`.
 - Marcas de asistencia: `P · Presente`, `F · Falta injustificada`, `J · Falta justificada`, `R · Reposición`, `H · Feriado`, `S · Suspendida por academia`.
 - Estados: `Pagado` / `Pendiente` (pills), `Por revisar` (alertas), `Retirar` / `Reactivar` (smallbtn), `Bailarín retirado` (en historiales).
-- Mensajes de éxito (toast): "Bailarín agregado", "Asistencia registrada", "Pago completo registrado", "Movimiento registrado". (El mensaje "Demo restablecida" del prototipo no aplica: ya no existe el botón de reset; el "anulado con éxito" de anulaciones seguirá este estilo.)
-- Mensajes de error (toast): "Registra primero un bailarín", "Esta mensualidad ya está registrada", "Origen y destino deben ser diferentes", "No se pudo guardar en este navegador".
-- Textos informativos: "Registra tarifas individuales y fecha fija de renovación." (Bailarines); "Solo pagos completos · Sin abonos · Efectivo o QR." (Pagos); "Una caja general · Una cuenta QR · Reparto 50/50." (Finanzas); "P presente · F falta · J justificada · R reposición · H feriado · S suspendida por academia." (Asistencia).
-- Cierre del mes: título "Cierre del mes · Simulación", subtítulo "Ingresos menos gastos. Indica cuánto reservar antes del reparto.", nota "El cálculo no registra automáticamente retiros. La caja chica es dinero reservado, no un gasto."
+- Mensajes de éxito (toast): "Bailarín agregado", "Asistencia registrada", "Pago completo registrado", "Salida registrada". (El mensaje "Demo restablecida" del prototipo no aplica: ya no existe el botón de reset; el "anulado con éxito" de anulaciones seguirá este estilo.)
+- Mensajes de error (toast): "Registra primero un bailarín", "Esta mensualidad ya está registrada", "No se pudo guardar en este navegador".
+- Textos informativos: "Registra tarifas individuales y fecha fija de renovación." (Bailarines); "Solo pagos completos · Sin abonos · Efectivo o QR." (Pagos); "Una caja general · Salidas con su concepto · Reparto 50/50." (Finanzas); "P presente · F falta · J justificada · R reposición · H feriado · S suspendida por academia." (Asistencia).
+- Cierre del mes: título "Cierre del mes · Simulación", subtítulo "Ingresos menos salidas. Indica cuánto reservar antes del reparto.", nota "El cálculo no registra automáticamente salidas. La caja chica es dinero reservado, no una salida."
 - Sucursales (tarjeta del dashboard): "Centro · Tarifa regular Bs. 120", "Norte · Tarifa regular Bs. 60", nota "Cada bailarín puede tener una tarifa promocional permanente mientras permanezca activo."
 
 ## Adaptación a escritorio (media query ≥ 750px)

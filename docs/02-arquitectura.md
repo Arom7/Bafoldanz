@@ -7,7 +7,7 @@
 - **Autenticación**: sesión web de Laravel (login/logout con Blade). Sanctum queda diferenciado para una futura app móvil.
 - **Roles y permisos**: `spatie/laravel-permission` (en v1 solo existe el rol `admin` para las directoras).
 - **PDF (v1.1)**: `barryvdh/laravel-dompdf`.
-- **Assets**: Vite solo para CSS/JS básicos (mostrar/ocultar campos del formulario de movimientos, **autocompletar la tarifa al cambiar de sucursal** — Centro 120 / Norte 60 —, y mantener la selección en los selects al recargar). No hay framework de frontend SPA.
+- **Assets**: Vite solo para CSS/JS básicos (**autocompletar la mensualidad al elegir el grupo según su sucursal** — Centro 120 / Norte 60 — y mantener la selección en los selects al recargar). No hay framework de frontend SPA.
 - **Diseño mobile-first**: la UI replica el prototipo original (tabs inferiores con `safe-area`, tarjetas, pills, toasts), pensada para iPhone. Todos los tokens de diseño (colores, tipografía, copys, íconos) están en `06-diseno-ui.md`.
 - **Tests**: PHPUnit. **Estilo de código**: Laravel Pint (PSR-12).
 
@@ -33,11 +33,12 @@ app/
 ├── Models/              # Modelos Eloquent con relaciones, casts y scopes
 │   ├── User.php
 │   ├── Branch.php
+│   ├── GroupType.php
 │   ├── Group.php
 │   ├── Student.php
+│   ├── Registration.php
 │   ├── Payment.php
 │   ├── Attendance.php
-│   ├── Account.php
 │   └── Movement.php
 ├── Services/            # LÓGICA DE NEGOCIO (aquí vive todo lo importante)
 │   ├── StudentService.php
@@ -91,12 +92,12 @@ POST   /attendance                        # registrar (update-or-create por alum
 GET    /payments                          # estado por mes (?month=) + listado últimos 30
 POST   /payments                          # registrar mensualidad
 PATCH  /payments/{id}/void                # anular pago (auditoría: quién, cuándo, motivo opcional)
-GET    /finance                           # totales por rango + reparto 50/50 + listado movimientos
-POST   /finance/movements                 # registrar gasto/retiro/transferencia
+GET    /finance                           # totales por rango + reparto 50/50 + listado de salidas
+POST   /finance/movements                 # registrar salida (concepto, monto, fecha, directora opcional)
 PATCH  /finance/movements/{id}/void       # anular movimiento (auditoría)
 ```
 
-(En v1 los catálogos `branches`, `groups`, `accounts` se cargan con **seeders**; su CRUD administrable va en v1.1 — ver `04-plan-migracion.md`.)
+(En v1 los catálogos `branches`, `group_types` y `groups` se cargan con **seeders**; su CRUD administrable va en v1.1 — ver `04-plan-migracion.md`.)
 
 ## Glosario (negocio ↔ código)
 
@@ -108,7 +109,12 @@ PATCH  /finance/movements/{id}/void       # anular movimiento (auditoría)
 | Retirar / reactivar | toggle (`active`, `retired_at`, `enrolled_at`) |
 | Anular | void (`voided_at`, `voided_by`) |
 | Marca de asistencia | attendance `code` |
-| Caja | Finance (`Account`, `Movement`) |
+| Inscripción | Registration |
+| Sucursal | Branch |
+| Tipo de grupo | GroupType |
+| Grupo (tipo + sucursal + horario) | Group |
+| Salida de caja | Movement |
+| Caja | Finance |
 | Cierre del mes | reparto 50/50 (simulación) |
 
 ## Convenciones de trabajo
