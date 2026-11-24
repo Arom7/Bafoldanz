@@ -3,6 +3,8 @@
 Esquema de la base de datos (MySQL 8.0 + Eloquent). Complementa a `01-contexto-negocio.md` (reglas del negocio) y `02-arquitectura.md` (arquitectura).
 
 > **Versión:** 2026-11-20 · Esquema reestructurado antes del MVP: alumno con un solo grupo mediante `registrations`, finanzas como **salidas** (sin cuentas ni transferencias) y anulación con motivo.
+>
+> **Alcance:** este esquema corresponde al MVP interno. El mockup «Ritmo Andino Glow» explora entidades que **no** están modeladas aquí (solicitudes/leads, danzas/elencos, salones, aforo, becas, currículo); se reservan para v1.1 y no deben agregarse sin actualizar antes `01-contexto-negocio.md`, `04-plan-migracion.md` y este documento.
 
 ## Convenciones
 

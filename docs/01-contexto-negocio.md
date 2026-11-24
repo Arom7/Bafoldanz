@@ -2,9 +2,15 @@
 
 Sistema de **control de asistencia y pagos** para una academia de danza (BAFOLDANZ, "Ballet Folclórico de Danza"), pensado para un negocio pequeño o mediano. El equipo está formado por **dos directoras** que gestionan alumnos, cobran mensualidades y administran la caja de la academia.
 
+## Alcance v1 y relación con el mockup
+
+El MVP sigue siendo la **app interna** de las dos directoras: alumnos, asistencia, pagos, finanzas, dashboard y login. El mockup de Stitch **“Plataforma Web Bafoldanz Academia”** aporta la **dirección visual y UX** (sistema «Ritmo Andino Glow»), pero también explora módulos públicos que **no forman parte de v1**: landing, clase demostrativa, solicitudes/leads, danzas/elencos, salones y métricas académicas. Esos módulos quedan documentados como **v1.1** en `04-plan-migracion.md` y `07-revision-mockup.md`.
+
+El mockup **no redefine reglas de negocio, catálogos ni el modelo de datos**. Si hay conflicto entre un dato del mockup (sedes, montos, horarios, estados) y los documentos 01/03, mandan los documentos.
+
 ## Requisitos no funcionales
 
-- **Mobile-first**: la app se usa principalmente en el navegador de Safari, sin embargo, debe estar disponible para los demas (navegación por pestañas inferior con `safe-area`, tarjetas apiladas, tipografía compacta). En escritorio se adapta con una media query simple. El detalle visual completo está en `06-diseno-ui.md`.
+- **Diseño mobile-first**: la app se usa principalmente en el navegador de Safari, pero debe funcionar en Chrome y Brave. La identidad vigente es **«Ritmo Andino Glow»** (tema oscuro, acento magenta, Montserrat + Plus Jakarta Sans, tarjetas de vidrio, navegación inferior con `safe-area`). En escritorio se adapta con media queries. Los tokens y componentes están en `06-diseno-ui.md`; la revisión del mockup, en `07-revision-mockup.md`.
 - **Zona horaria y locale**: `APP_TIMEZONE=America/La_Paz` y `app.locale=es`. Un "mes" o un "día" siempre se calcula en hora de Bolivia, nunca en UTC.
 - **Dos directoras**: el negocio funciona con exactamente dos directoras (el reparto es 50/50). Existen como usuarios del sistema (`users` con flag `is_director`) para identificar quién realizó una salida y para el reparto.
 - **Acceso**: las directoras son las únicas que pueden realizar todas las funciones descritas (rol `admin` de spatie).

@@ -102,6 +102,15 @@ Problema: nginx y `app` son imágenes distintas y el código va dentro de la ima
 
 Solución decidida: la **imagen de nginx es multi-stage** y copia `public/` (incluido `public/build`) desde el mismo stage `assets` (node) que usa la imagen de `app`. Ambas imágenes se construyen de la misma versión del código, así los assets siempre coinciden con el PHP. Alternativa descartada: volumen compartido (acoplamiento en runtime, más frágil al escalar).
 
+## Fuentes e íconos (tema «Ritmo Andino Glow»)
+
+La interfaz usa **Montserrat**, **Plus Jakarta Sans** y **Material Symbols Outlined**. Dos opciones:
+
+- **Google Fonts** con `preconnect` y `display=swap`; si se usa, la CSP/reverse proxy debe permitir `fonts.googleapis.com` y `fonts.gstatic.com`.
+- **Autoalojadas** en `public/fonts` (recomendado para producción sin dependencia externa); al estar en `public/`, viajan en la misma imagen multi-stage de nginx que los assets de Vite.
+
+El CDN de Tailwind que usa el mockup es solo de prototipo: **no se despliega**. El CSS del proyecto es propio (variables en `06-diseno-ui.md`).
+
 ## Base de datos de tests (separada)
 
 Obligatoria: `RefreshDatabase` sobre la BD de desarrollo **borraría las tablas**, lo que viola la regla del proyecto de no ejecutar comandos destructivos contra la BD.
