@@ -3,7 +3,7 @@
 Pagina web destinado al control de asistencia y pagos.
 
 ## Documentación
-Lee primero `docs/README.md`. Contexto del negocio en `docs/01-contexto-negocio.md`; arquitectura MVC en `docs/02-arquitectura.md`; modelo de datos en `docs/03-modelo-datos.md`; plan de migración y avance por fases en `docs/04-plan-migracion.md`; despliegue Docker en `docs/05-despliegue.md`; diseño de la interfaz en `docs/06-diseno-ui.md`.
+Lee primero `docs/README.md`. Contexto del negocio en `docs/01-contexto-negocio.md`; arquitectura MVC en `docs/02-arquitectura.md`; modelo de datos en `docs/03-modelo-datos.md`; plan de migración y avance por fases en `docs/04-plan-migracion.md`; despliegue Docker en `docs/05-despliegue.md`; diseño de la interfaz en `docs/06-diseno-ui.md`; revisión del mockup y brechas en `docs/07-revision-mockup.md`.
 
 ## Revisión del código
 Todo el código que generes se entrega para revisión del usuario. **No ejecutes `git commit` ni `git push` en ningún caso.**
@@ -17,6 +17,14 @@ Todo el código que generes se entrega para revisión del usuario. **No ejecutes
 - Vite solo para assets; no hay frontend SPA
 - Despliegue: Docker (ver `docs/05-despliegue.md`). **No hay PHP ni Composer en el host**: todo artisan/composer/test se ejecuta dentro de contenedores, vía `make ...` o `docker compose exec app ...`
 
+## Diseño
+- **Fuente normativa:** `docs/06-diseno-ui.md` (sistema «Ritmo Andino Glow»). La revisión del mockup y sus brechas están en `docs/07-revision-mockup.md`.
+- **Mockup canónico:** Stitch “Plataforma Web Bafoldanz Academia” (`projects/9559637951038574277`), móvil 390 px, tema oscuro. Es referencia **visual/UX**, no especificación funcional ni de datos.
+- **Alcance:** el rediseño aplica al MVP interno. Landing pública, solicitudes/leads, danzas/elencos, salones y métricas académicas son **v1.1** y requieren aprobación antes de implementarse.
+- **Datos:** nunca copiar cifras, nombres, montos, sedes ni horarios de demostración del mockup. La UI usa datos de la BD.
+- **Assets:** Montserrat + Plus Jakarta Sans y Material Symbols; cargar con `preconnect`/`display=swap` o autoalojar. CSS propio con variables; Tailwind CDN del mockup **no** se usa en producción.
+- **Componentes:** reutilizar `resources/views/components/ui/` y el layout; no duplicar estilos ni crear una segunda identidad visual.
+
 ## Comandos habituales
 - `make up` / `make down`: levantar/bajar el stack local en Docker
 - `make test`: ejecuta los tests (contra la BD de tests separada)
@@ -27,13 +35,15 @@ Todo el código que generes se entrega para revisión del usuario. **No ejecutes
 ## Convenciones
 - PSR-12 vía Pint; tipado estricto en parámetros y retornos
 - Nombres de clases y URLs en inglés (`/students`, `/payments`, ...); interfaz en español
-- Zona horaria `America/La_Paz`; locale `es`; moneda Bs. (es-BO); diseño mobile-first (tokens en `docs/06-diseno-ui.md`)
+- Zona horaria `America/La_Paz`; locale `es`; moneda Bs. (es-BO); diseño mobile-first con tema oscuro «Ritmo Andino Glow» (tokens en `docs/06-diseno-ui.md`)
 - Tests en `tests/Feature` (endpoints) y `tests/Unit` (servicios), con el nombre `NombreTest.php`
 - Todo endpoint nuevo o modificado debe tener un test
 - Actualiza el README si cambias rutas
 
 ## Lo que NO debes hacer
-- No instales dependencias nuevas sin avisar
+- No instales dependencias nuevas sin avisar (incluido Tailwind; el CSS es propio)
+- No copies datos placeholder ni textos de demostración del mockup
+- No implementes módulos v1.1 (landing, leads, elencos, salones) sin aprobación explícita
 - No edites migraciones ya existentes; crea una nueva
 - No leas, muestres ni modifiques `.env` usa `.env.example`
 - No pongas lógica de negocio ni consultas Eloquent en los controladores
