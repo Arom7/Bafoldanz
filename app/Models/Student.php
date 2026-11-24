@@ -22,6 +22,10 @@ class Student extends Model
     /** @use HasFactory<StudentFactory> */
     use HasFactory, SoftDeletes;
 
+    protected $attributes = [
+        'active' => true,
+    ];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -116,5 +120,12 @@ class Student extends Model
             ->where(function (Builder $q) use ($start) {
                 $q->whereNull('retired_at')->orWhere('retired_at', '>=', $start);
             });
+    }
+
+    public function fee(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => number_format($value, 0, '.', ''),
+        );
     }
 }

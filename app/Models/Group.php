@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 #[Fillable(['branch_id', 'group_type_id', 'hour_start', 'hour_end', 'is_active'])]
 class Group extends Model
 {
@@ -65,4 +67,21 @@ class Group extends Model
     {
         $query->where('is_active', true);
     }
+
+    // Formato de salida horarios inicio y fin
+    public function hourStart(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => \Carbon\Carbon::createFromFormat('H:i:s', $value)?->format('H:i'),
+        );
+    }
+
+    public function hourEnd(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => \Carbon\Carbon::createFromFormat('H:i:s', $value)?->format('H:i'),
+        );
+    }
+
+
 }
